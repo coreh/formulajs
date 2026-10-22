@@ -1096,6 +1096,17 @@ describe('Statistical', () => {
     known_y = [6, 9, 3, 5, 4, 4, 5]
     expect(statistical.T.TEST(known_x, known_y)).to.approximately(0.6141571469712601, 1e-9)
     expect(statistical.T.TEST('invalid', known_y)).to.equal(error.value)
+    known_x = [3, 4, 5, 8, 9, 1, 2, 4, 5]
+    known_y = [6, 19, 3, 2, 14, 4, 5, 17, 1]
+    expect(statistical.T.TEST(known_x, known_y, 2, 1)).to.approximately(0.196016, 1e-6)
+    expect(statistical.T.TEST(known_x, known_y, 1, 1)).to.approximately(0.098008, 1e-6)
+    expect(statistical.T.TEST(known_x, known_y, 2, 2)).to.approximately(0.191996, 1e-6)
+    expect(statistical.T.TEST(known_x, known_y, 2, 3)).to.approximately(0.202294, 1e-6)
+    expect(statistical.T.TEST(known_x, known_y, 3, 1)).to.equal(error.num)
+    expect(statistical.T.TEST([1], [2], 2, 1)).to.equal(error.div0)
+    expect(statistical.T.TEST([1, 1], [1, 1], 2, 2)).to.equal(error.div0)
+    expect(statistical.T.TEST([1, 2, 3], [2, 3, 4], 2, 1)).to.equal(error.div0)
+    expect(statistical.T.TEST([1, 1], [1, 1], 2, 3)).to.equal(error.div0)
   })
 
   it('TREND', () => {
