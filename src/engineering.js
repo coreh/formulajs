@@ -1447,7 +1447,7 @@ export function IMLN(inumber) {
   unit = unit === 'i' || unit === 'j' ? unit : 'i'
 
   // Return exponential of complex number
-  return COMPLEX(Math.log(Math.sqrt(x * x + y * y)), Math.atan(y / x), unit)
+  return COMPLEX(Math.log(Math.sqrt(x * x + y * y)), Math.atan2(y, x), unit)
 }
 
 /**
@@ -1472,7 +1472,7 @@ export function IMLOG10(inumber) {
   unit = unit === 'i' || unit === 'j' ? unit : 'i'
 
   // Return exponential of complex number
-  return COMPLEX(Math.log(Math.sqrt(x * x + y * y)) / Math.log(10), Math.atan(y / x) / Math.log(10), unit)
+  return COMPLEX(Math.log(Math.sqrt(x * x + y * y)) / Math.log(10), Math.atan2(y, x) / Math.log(10), unit)
 }
 
 /**
@@ -1497,7 +1497,7 @@ export function IMLOG2(inumber) {
   unit = unit === 'i' || unit === 'j' ? unit : 'i'
 
   // Return exponential of complex number
-  return COMPLEX(Math.log(Math.sqrt(x * x + y * y)) / Math.log(2), Math.atan(y / x) / Math.log(2), unit)
+  return COMPLEX(Math.log(Math.sqrt(x * x + y * y)) / Math.log(2), Math.atan2(y, x) / Math.log(2), unit)
 }
 
 /**

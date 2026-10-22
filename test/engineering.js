@@ -334,6 +334,9 @@ describe('Engineering', () => {
     const im = engineering.IMLN('3+4i')
     expect(engineering.IMREAL(im)).to.approximately(1.6094379124341003, 1e-9)
     expect(engineering.IMAGINARY(im)).to.approximately(0.9272952180016122, 1e-9)
+    const negative = engineering.IMLN('-2')
+    expect(engineering.IMREAL(negative)).to.approximately(0.6931471805599453, 1e-9)
+    expect(engineering.IMAGINARY(negative)).to.approximately(3.141592653589793, 1e-9)
     expect(engineering.IMLN('a')).to.equal(error.value)
   })
 
@@ -341,6 +344,9 @@ describe('Engineering', () => {
     const im = engineering.IMLOG10('3+4i')
     expect(engineering.IMREAL(im)).to.approximately(0.6989700043360187, 1e-9)
     expect(engineering.IMAGINARY(im)).to.approximately(0.4027191962733731, 1e-9)
+    const negative = engineering.IMLOG10('-2')
+    expect(engineering.IMREAL(negative)).to.approximately(0.30102999566398114, 1e-9)
+    expect(engineering.IMAGINARY(negative)).to.approximately(1.3643763538418412, 1e-9)
     expect(engineering.IMLOG10('a')).to.equal(error.value)
   })
 
@@ -348,6 +354,9 @@ describe('Engineering', () => {
     const im = engineering.IMLOG2('3+4i')
     expect(engineering.IMREAL(im)).to.approximately(2.321928094887362, 1e-9)
     expect(engineering.IMAGINARY(im)).to.approximately(1.3378042124509761, 1e-9)
+    const negative = engineering.IMLOG2('-2')
+    expect(engineering.IMREAL(negative)).to.approximately(1, 1e-9)
+    expect(engineering.IMAGINARY(negative)).to.approximately(4.532360141827194, 1e-9)
     expect(engineering.IMLOG2('a')).to.equal(error.value)
   })
 
