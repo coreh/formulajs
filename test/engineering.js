@@ -197,6 +197,9 @@ describe('Engineering', () => {
   it('ERF', () => {
     expect(engineering.ERF(0.745)).to.approximately(0.7079289200957377, 1e-9)
     expect(engineering.ERF(1)).to.approximately(0.8427007929497149, 1e-9)
+    expect(engineering.ERF(0, 1)).to.approximately(0.8427007929497149, 1e-9)
+    expect(engineering.ERF(1, 2)).to.approximately(0.1526214720692377, 1e-9)
+    expect(engineering.ERF(1, 0)).to.approximately(-0.8427007929497149, 1e-9)
     expect(engineering.ERF('a')).to.equal(error.value)
   })
 

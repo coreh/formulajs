@@ -927,6 +927,7 @@ export function DELTA(number1, number2) {
  * @returns
  */
 export function ERF(lower_limit, upper_limit) {
+  const hasUpperLimit = upper_limit !== undefined
   // Set number2 to zero if undefined
   upper_limit = upper_limit === undefined ? 0 : upper_limit
 
@@ -937,7 +938,7 @@ export function ERF(lower_limit, upper_limit) {
     return error.value
   }
 
-  return jStat.erf(lower_limit)
+  return hasUpperLimit ? jStat.erf(upper_limit) - jStat.erf(lower_limit) : jStat.erf(lower_limit)
 }
 
 /**
