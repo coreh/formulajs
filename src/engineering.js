@@ -1131,6 +1131,17 @@ export function IMABS(inumber) {
   return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2))
 }
 
+// Index of the sign between the real and imaginary parts (not a leading sign, nor an exponent's)
+function complexSignIndex(inumber, sign) {
+  let index = inumber.indexOf(sign, 1)
+
+  while (index > 0 && (inumber.charAt(index - 1) === 'e' || inumber.charAt(index - 1) === 'E')) {
+    index = inumber.indexOf(sign, index + 1)
+  }
+
+  return index
+}
+
 /**
  * Returns the imaginary coefficient of a complex number.
  *
@@ -1161,16 +1172,8 @@ export function IMAGINARY(inumber) {
   inumber = inumber.replace('+i', '+1i').replace('-i', '-1i').replace('+j', '+1j').replace('-j', '-1j')
 
   // Lookup sign
-  let plus = inumber.indexOf('+')
-  let minus = inumber.indexOf('-')
-
-  if (plus === 0) {
-    plus = inumber.indexOf('+', 1)
-  }
-
-  if (minus === 0) {
-    minus = inumber.indexOf('-', 1)
-  }
+  const plus = complexSignIndex(inumber, '+')
+  const minus = complexSignIndex(inumber, '-')
 
   // Lookup imaginary unit
   const last = inumber.substring(inumber.length - 1, inumber.length)
@@ -1595,16 +1598,8 @@ export function IMREAL(inumber) {
   inumber = inumber + ''
 
   // Lookup sign
-  let plus = inumber.indexOf('+')
-  let minus = inumber.indexOf('-')
-
-  if (plus === 0) {
-    plus = inumber.indexOf('+', 1)
-  }
-
-  if (minus === 0) {
-    minus = inumber.indexOf('-', 1)
-  }
+  const plus = complexSignIndex(inumber, '+')
+  const minus = complexSignIndex(inumber, '-')
 
   // Lookup imaginary unit
   const last = inumber.substring(inumber.length - 1, inumber.length)

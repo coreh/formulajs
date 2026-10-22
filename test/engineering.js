@@ -249,6 +249,9 @@ describe('Engineering', () => {
   })
 
   it('IMAGINARY', () => {
+    expect(engineering.IMAGINARY('1.2246467991473532e-16+2i')).to.equal(2)
+    expect(engineering.IMAGINARY('1e-3-2i')).to.equal(-2)
+    expect(engineering.IMAGINARY('1e+5+2i')).to.equal(2)
     expect(engineering.IMAGINARY('3+4i')).to.equal(4)
     expect(engineering.IMAGINARY('i')).to.equal(1)
     expect(engineering.IMAGINARY('+i')).to.equal('+1')
@@ -377,6 +380,9 @@ describe('Engineering', () => {
   })
 
   it('IMREAL', () => {
+    expect(engineering.IMREAL('1.2246467991473532e-16+2i')).to.equal(1.2246467991473532e-16)
+    expect(engineering.IMREAL('1e-3-2i')).to.equal(0.001)
+    expect(engineering.IMREAL('1e+5+2i')).to.equal(100000)
     expect(engineering.IMREAL('6-9i')).to.equal(6)
     expect(engineering.IMREAL('i')).to.equal(0)
     expect(engineering.IMREAL('+i')).to.equal(0)
