@@ -377,8 +377,11 @@ describe('Statistical', () => {
     expect(statistical.F.TEST([1, 3, 5, 7, 9], [1])).to.equal(error.div0)
     expect(statistical.F.TEST([1], [1, 3, 5, 7, 9])).to.equal(error.div0)
     expect(statistical.F.TEST([1], [1])).to.equal(error.div0)
-    expect(statistical.F.TEST([1, 3, 5, 7, 9], [5, 9, 3, 8, 3])).to.approximately(1.282, 1e-3)
-    expect(statistical.F.TEST([4, 2, 5, 1, 3], [8, 3, 9, 0, 1])).to.approximately(0.1497, 1e-4)
+    expect(statistical.F.TEST([1, 3, 5, 7, 9], [5, 9, 3, 8, 3])).to.approximately(0.8155507547, 1e-9)
+    expect(statistical.F.TEST([4, 2, 5, 1, 3], [8, 3, 9, 0, 1])).to.approximately(0.0928949427, 1e-9)
+    expect(statistical.F.TEST([6, 7, 9, 15, 21], [20, 28, 31, 38, 40])).to.approximately(0.64831785, 1e-8)
+    expect(statistical.F.TEST([1, 1], [1, 2])).to.equal(error.div0)
+    expect(statistical.F.TEST([1, 2], [1, 1])).to.equal(error.div0)
   })
 
   it('FISHER', () => {

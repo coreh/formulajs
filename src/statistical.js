@@ -988,7 +988,13 @@ F.TEST = (array1, array2) => {
   const sum1 = sumOfSquares(array1, x1) / (array1.length - 1)
   const sum2 = sumOfSquares(array2, x2) / (array2.length - 1)
 
-  return sum1 / sum2
+  if (sum1 === 0 || sum2 === 0) {
+    return error.div0
+  }
+
+  const p = jStat.centralF.cdf(sum1 / sum2, array1.length - 1, array2.length - 1)
+
+  return 2 * Math.min(p, 1 - p)
 }
 
 /**
