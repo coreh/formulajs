@@ -2703,11 +2703,19 @@ export function STEYX(known_y, known_x) {
  * @returns
  */
 T.DIST = (x, deg_freedom, cumulative) => {
-  if (cumulative !== 1 && cumulative !== 2) {
+  x = utils.parseNumber(x)
+  deg_freedom = utils.parseNumber(deg_freedom)
+  cumulative = utils.parseBool(cumulative)
+
+  if (utils.anyIsError(x, deg_freedom, cumulative)) {
+    return error.value
+  }
+
+  if (deg_freedom < 1) {
     return error.num
   }
 
-  return cumulative === 1 ? T.DIST.RT(x, deg_freedom) : T.DIST['2T'](x, deg_freedom)
+  return cumulative ? jStat.studentt.cdf(x, deg_freedom) : jStat.studentt.pdf(x, deg_freedom)
 }
 
 /**
@@ -2758,6 +2766,24 @@ T.DIST.RT = function (x, deg_freedom) {
   }
 
   return 1 - jStat.studentt.cdf(x, deg_freedom)
+}
+
+/**
+ * Returns the Student's t-distribution, right-tailed (tails = 1) or two-tailed (tails = 2), as the legacy TDIST.
+ *
+ * Category: Statistical
+ *
+ * @param {*} x The numeric value at which to evaluate the distribution.
+ * @param {*} deg_freedom An integer indicating the number of degrees of freedom.
+ * @param {*} tails Specifies the number of distribution tails to return.
+ * @returns
+ */
+T.DIST.TAILS = (x, deg_freedom, tails) => {
+  if (tails !== 1 && tails !== 2) {
+    return error.num
+  }
+
+  return tails === 1 ? T.DIST.RT(x, deg_freedom) : T.DIST['2T'](x, deg_freedom)
 }
 
 /**
