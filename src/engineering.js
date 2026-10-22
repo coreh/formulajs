@@ -1239,9 +1239,9 @@ export function IMARGUMENT(inumber) {
     return 0
   }
 
-  // Return zero if x is negative and y is equal to zero
+  // Return PI if x is negative and y is equal to zero
   if (y === 0 && x < 0) {
-    return -Math.PI
+    return Math.PI
   }
 
   // Return argument of complex number

@@ -267,7 +267,7 @@ describe('Engineering', () => {
     expect(engineering.IMARGUMENT('2i')).to.equal(Math.PI / 2)
     expect(engineering.IMARGUMENT('-2i')).to.equal(-Math.PI / 2)
     expect(engineering.IMARGUMENT('2')).to.equal(0)
-    expect(engineering.IMARGUMENT('-2')).to.equal(-Math.PI)
+    expect(engineering.IMARGUMENT('-2')).to.equal(Math.PI)
     expect(engineering.IMARGUMENT('-1+2i')).to.approximately(2.0344439357957027, 1e-9)
     expect(engineering.IMARGUMENT('-1-2i')).to.approximately(-2.0344439357957027, 1e-9)
   })
@@ -418,6 +418,7 @@ describe('Engineering', () => {
     const im = engineering.IMSQRT('1+i')
     expect(engineering.IMREAL(im)).to.approximately(1.0986841134678098, 1e-9)
     expect(engineering.IMAGINARY(im)).to.approximately(0.45508986056222733, 1e-9)
+    expect(engineering.IMSQRT('-4')).to.match(/\+2i$/)
     expect(engineering.IMSQRT('a')).to.equal(error.value)
   })
 
