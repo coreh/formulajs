@@ -459,6 +459,32 @@ export function CONVERT(number, from_unit, to_unit) {
     return number
   }
 
+  // Temperatures whose zero isn't kelvin's (not a ratio, as the units below are): [to Celsius, from Celsius]
+  const temperatures = {
+    C: [(x) => x, (x) => x],
+    cel: [(x) => x, (x) => x],
+    F: [(x) => (x - 32) / 1.8, (x) => x * 1.8 + 32],
+    fah: [(x) => (x - 32) / 1.8, (x) => x * 1.8 + 32],
+    Reau: [(x) => x / 0.8, (x) => x * 0.8]
+  }
+  const from_temperature = Object.prototype.hasOwnProperty.call(temperatures, from_unit) && temperatures[from_unit]
+  const to_temperature = Object.prototype.hasOwnProperty.call(temperatures, to_unit) && temperatures[to_unit]
+
+  if (from_temperature && to_temperature) {
+    return to_temperature[1](from_temperature[0](number))
+  }
+
+  // Between those and others, through kelvin (any other unit than a temperature is #N/A)
+  if (from_temperature) {
+    return CONVERT(from_temperature[0](number) + 273.15, 'K', to_unit)
+  }
+
+  if (to_temperature) {
+    const kelvin = CONVERT(number, from_unit, 'K')
+
+    return kelvin instanceof Error ? kelvin : to_temperature[1](kelvin - 273.15)
+  }
+
   // List of units supported by CONVERT and units defined by the International System of Units
   // [Name, Symbol, Alternate symbols, Quantity, ISU, CONVERT, Conversion ratio]
   const units = [

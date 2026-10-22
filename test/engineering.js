@@ -132,8 +132,22 @@ describe('Engineering', () => {
   })
 
   it('CONVERT', () => {
+    expect(engineering.CONVERT(68, 'F', 'C')).to.equal(20)
+    expect(engineering.CONVERT(100, 'cel', 'fah')).to.equal(212)
+    expect(engineering.CONVERT(0, 'C', 'K')).to.equal(273.15)
+    expect(engineering.CONVERT(25, 'C', 'Reau')).to.equal(20)
+    expect(engineering.CONVERT(20, 'Reau', 'C')).to.equal(25)
+    expect(engineering.CONVERT(-40, 'C', 'F')).to.equal(-40)
+    expect(engineering.CONVERT(273.15, 'kel', 'cel')).to.equal(0)
+    expect(engineering.CONVERT(491.67, 'Rank', 'C')).to.approximately(0, 1e-9)
+    expect(engineering.CONVERT(0, 'C', 'Rank')).to.approximately(491.67, 1e-9)
+    expect(engineering.CONVERT(0, 'C', 'mK')).to.approximately(273150, 1e-6)
+    expect(engineering.CONVERT(273150, 'mK', 'C')).to.approximately(0, 1e-9)
+    expect(engineering.CONVERT(1, 'C', 'm')).to.equal(error.na)
+    expect(engineering.CONVERT(1, 'm', 'F')).to.equal(error.na)
+    expect(engineering.CONVERT(0, 'C', 'constructor')).to.equal(error.na)
+    expect(engineering.CONVERT(0, 'toString', 'C')).to.equal(error.na)
     expect(engineering.CONVERT(1, 'lbm', 'kg')).to.approximately(0.45359237, 1e-9)
-    // expect(engineering.CONVERT(68, 'F', 'C')).to.equal(20);
     expect(engineering.CONVERT(2.5, 'ft', 'sec')).to.equal(error.na)
     expect(engineering.CONVERT(engineering.CONVERT(100, 'ft', 'm'), 'ft', 'm')).to.approximately(9.290304, 1e-9)
     expect(engineering.CONVERT('a', 1)).to.equal(error.value)
