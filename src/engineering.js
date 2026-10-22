@@ -135,11 +135,11 @@ export function BIN2HEX(number, places) {
   const stringified = number.toString()
 
   if (stringified.length === 10 && stringified.substring(0, 1) === '1') {
-    return (1099511627264 + parseInt(stringified.substring(1), 2)).toString(16)
+    return (1099511627264 + parseInt(stringified.substring(1), 2)).toString(16).toUpperCase()
   }
 
   // Convert binary number to hexadecimal
-  const result = parseInt(number, 2).toString(16)
+  const result = parseInt(number, 2).toString(16).toUpperCase()
 
   // Return hexadecimal number using the minimum number of characters necessary if places is undefined
   if (places === undefined) {
@@ -814,11 +814,11 @@ export function DEC2HEX(number, places) {
 
   // Ignore places and return a 10-character hexadecimal number if number is negative
   if (number < 0) {
-    return (1099511627776 + number).toString(16)
+    return (1099511627776 + number).toString(16).toUpperCase()
   }
 
   // Convert decimal number to hexadecimal
-  const result = parseInt(number, 10).toString(16)
+  const result = parseInt(number, 10).toString(16).toUpperCase()
 
   // Return hexadecimal number using the minimum number of characters necessary if places is undefined
   if (typeof places === 'undefined') {
@@ -2012,11 +2012,11 @@ export function OCT2HEX(number, places) {
 
   // Ignore places and return a 10-character octal number if number is negative
   if (decimal >= 536870912) {
-    return 'ff' + (decimal + 3221225472).toString(16)
+    return 'FF' + (decimal + 3221225472).toString(16).toUpperCase()
   }
 
   // Convert decimal number to hexadecimal
-  const result = decimal.toString(16)
+  const result = decimal.toString(16).toUpperCase()
 
   // Return hexadecimal number using the minimum number of characters necessary if places is undefined
   if (places === undefined) {
