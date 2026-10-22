@@ -1804,6 +1804,21 @@ export function SUMPRODUCT() {
     return error.value
   }
 
+  const args = Array.prototype.slice.call(arguments)
+
+  // A plain number is a one-cell array, of the same form as the arrays given with it
+  if (args.some((arg) => !(arg instanceof Array))) {
+    const matrix = args.some((arg) => arg instanceof Array && arg[0] instanceof Array)
+
+    return SUMPRODUCT(...args.map((arg) => (arg instanceof Array ? arg : matrix ? [[arg]] : [arg])))
+  }
+
+  const shape = (arg) => arg.map((row) => (row instanceof Array ? row.length : -1)).join()
+
+  if (args.some((arg) => shape(arg) !== shape(args[0]))) {
+    return error.value
+  }
+
   const arrays = arguments.length + 1
   let result = 0
   let product
