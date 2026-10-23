@@ -1,5 +1,6 @@
 import { expect } from 'chai'
 
+import * as compatibility from '../src/compatibility.js'
 import * as error from '../src/utils/error.js'
 import * as mathTrig from '../src/math-trig.js'
 import * as statistical from '../src/statistical.js'
@@ -1162,5 +1163,13 @@ describe('Statistical', () => {
     expect(statistical.Z.TEST(data, 4)).to.approximately(0.09057419685136381, 1e-9)
     expect(statistical.Z.TEST(data, 6)).to.approximately(0.86304338912953, 1e-9)
     expect(statistical.Z.TEST(data, 'invalid')).to.equal(error.value)
+  })
+
+  it('legacy right-tailed and two-tailed functions', () => {
+    expect(compatibility.CHIDIST(18.307, 10)).to.approximately(0.050001, 1e-6)
+    expect(compatibility.CHIINV(0.050001, 10)).to.approximately(18.306973, 1e-6)
+    expect(compatibility.FDIST(15.2069, 6, 4)).to.approximately(0.01, 1e-6)
+    expect(compatibility.FINV(0.01, 6, 4)).to.approximately(15.206865, 1e-6)
+    expect(compatibility.TINV(0.05464493, 60)).to.approximately(1.959999998, 1e-6)
   })
 })
