@@ -427,16 +427,18 @@ export function COMPLEX(real_num, i_num, suffix) {
     return error.value
   }
 
+  const imaginary = i_num === 1 ? suffix : i_num === -1 ? '-' + suffix : i_num.toString() + suffix
+
   // Return complex number
   if (real_num === 0 && i_num === 0) {
     return 0
   } else if (real_num === 0) {
-    return i_num === 1 ? suffix : i_num.toString() + suffix
+    return imaginary
   } else if (i_num === 0) {
     return real_num.toString()
   } else {
     const sign = i_num > 0 ? '+' : ''
-    return real_num.toString() + sign + (i_num === 1 ? suffix : i_num.toString() + suffix)
+    return real_num.toString() + sign + imaginary
   }
 }
 

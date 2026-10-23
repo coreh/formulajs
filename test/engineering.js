@@ -123,6 +123,8 @@ describe('Engineering', () => {
     expect(engineering.COMPLEX(3, 4)).to.equal('3+4i')
     expect(engineering.COMPLEX(3, 4, 'j')).to.equal('3+4j')
     expect(engineering.COMPLEX(0, 1)).to.equal('i')
+    expect(engineering.COMPLEX(0, -1)).to.equal('-i')
+    expect(engineering.COMPLEX(3, -1, 'j')).to.equal('3-j')
     expect(engineering.COMPLEX(1, 0)).to.equal('1')
     expect(engineering.COMPLEX(0, 0)).to.equal(0)
     expect(engineering.COMPLEX('a', 1)).to.equal(error.value)
@@ -317,7 +319,7 @@ describe('Engineering', () => {
     expect(engineering.IMDIV('a', 'i')).to.equal(error.value)
     expect(engineering.IMDIV('i', '0')).to.equal(error.num)
     expect(engineering.IMDIV('j', '1')).to.equal('j')
-    expect(engineering.IMDIV('1', 'j')).to.equal('-1j')
+    expect(engineering.IMDIV('1', 'j')).to.equal('-j')
   })
 
   it('IMEXP', () => {
